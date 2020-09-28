@@ -13,6 +13,7 @@ func indexhandler(writer http.ResponseWriter, request *http.Request) {
 func main() {
 
 	http.HandleFunc("/", indexhandler)
-	http.ListenAndServe(":3000", nil)
+	fmt.Println("running at : http://localhost:8080")
+	http.ListenAndServe(":8080", nil)
 
 }

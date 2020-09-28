@@ -20,7 +20,7 @@ func main() {
 				_, _ = writer.Write([]byte("404 - Not Found\n"))
 			} else {
 				fmt.Println("Number accessed : ", number)
-				fmt.Println("Numeral returned : ",lib.Numerals[number])
+				fmt.Println("Numeral returned : ", lib.Numerals[number])
 				_, _ = fmt.Fprintf(writer, "%q\n", html.EscapeString(lib.Numerals[number]))
 			}
 		} else {
@@ -31,5 +31,6 @@ func main() {
 	server := &http.Server{
 		Addr: ":8000",
 	}
+	fmt.Println("running at : http://localhost:8000")
 	_ = server.ListenAndServe()
 }

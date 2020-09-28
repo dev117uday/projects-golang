@@ -3,10 +3,11 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"github.com/gofiber/fiber"
-	_ "github.com/lib/pq"
 	"log"
 	"time"
+
+	"github.com/gofiber/fiber"
+	_ "github.com/lib/pq"
 )
 
 const (
@@ -16,7 +17,6 @@ const (
 	password = "test123"
 	dbname   = "test"
 )
-
 
 type sandbox struct {
 	id        int
@@ -74,6 +74,6 @@ func main() {
 		fmt.Println(elapsed)
 		context.Send(snbs)
 	})
-
+	fmt.Println("Running at : http://localhost:3000")
 	_ = app.Listen(3000)
 }

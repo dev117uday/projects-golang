@@ -14,11 +14,12 @@ func (p *CustomServerMux) ServeHTTP(writer http.ResponseWriter, request *http.Re
 		fmt.Println("\"/\" accessed")
 		return
 	}
-	http.NotFound(writer,request)
+	http.NotFound(writer, request)
 	return
 }
 
 func main() {
 	mux := &CustomServerMux{}
+	fmt.Println("running at : http://localhost:8000")
 	_ = http.ListenAndServe(":8000", mux)
 }

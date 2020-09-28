@@ -24,6 +24,6 @@ func newsAggHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/agg/", newsAggHandler)
-	fmt.Println("http://localhost:8000")
+	fmt.Println("running at : http://localhost:8080")
 	http.ListenAndServe(":8000", nil)
 }
