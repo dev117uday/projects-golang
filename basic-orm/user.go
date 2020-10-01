@@ -1,15 +1,20 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"net/http"
 
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
+// "gorm.io/driver/sqlite"
+// _ "gorm.io/gorm"
 // "github.com/jinzhu/gorm/dialects/sqlite"
+// "github.com/jinzhu/gorm"
+// _ "github.com/jinzhu/gorm/dialects/sqlite"
 
 var db *gorm.DB
 var err error
@@ -23,12 +28,12 @@ type User struct {
 
 // InitialMigration  :  to create a connection
 func InitialMigration() {
-	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	db, err := sql.Open("sqlite3", "./test.db")
 	if err != nil {
 		fmt.Println(err.Error())
 		panic("Panic")
 	}
-	db.AutoMigrate(&User{})
+	db.Close()
 }
 
 // GetAllUsers : to get all users
