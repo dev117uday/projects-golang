@@ -85,11 +85,30 @@ func DeleteUser(email string) int {
 		fmt.Println("Error in delete user")
 		return 0
 	}
-	_, errx := stmnt.Exec()
-	fmt.Println(errx)
+	answer, errx := stmnt.Exec()
+	noOfRowsDeleted, _ := answer.RowsAffected()
+	if noOfRowsDeleted == 0 {
+		return -1
+	}
 	if errx != nil {
-		fmt.Println("cannot delete")
+		fmt.Println("Error in delete user")
 		return 0
 	}
 	return 1
+}
+
+// UpdateUser :  to update the user information
+func UpdateUser(name, email string) (int, error) {
+	queryToRun := "update users set Email = '" + email + "' where Name = '" + name + "';"
+	stmnt, err := db.Prepare(queryToRun)
+	if err != nil {
+		fmt.Println("error in updateUser")
+		return 0, err
+	}
+	_, errx := stmnt.Exec()
+	if errx != nil {
+		fmt.Println("error in updateUser")
+		return 0, err
+	}
+	return 1, nil
 }

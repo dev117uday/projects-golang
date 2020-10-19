@@ -44,13 +44,19 @@ func StartServer() {
 		result := database.DeleteUser(con.Params("email"))
 		if result == 0 {
 			return con.SendString("unable to delete")
+		} else if result == -1 {
+			return con.SendString("user doesnt exist in DB")
 		}
 		return con.SendString("user delete")
 
 	})
 	// UpdateUser :  to update user info
 	app.Put("/update/:name/:email", func(con *fiber.Ctx) error {
-		return con.SendString("UpdateUser endpoint hit")
+		_, error := database.UpdateUser(con.Params("name"), con.Params("email"))
+		if error != nil {
+			con.SendString("error in updating the user")
+		}
+		return con.SendString("user updated")
 	})
 
 	log.Fatal(app.Listen(":8000"))
