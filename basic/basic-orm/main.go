@@ -1,7 +1,7 @@
 package main
 
 import (
-	"projects-golang/basic-orm/router"
+	"projects-golang/basic/basic-orm/router"
 
 	_ "github.com/mattn/go-sqlite3"
 )

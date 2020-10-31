@@ -3,7 +3,8 @@ package router
 import (
 	"fmt"
 	"log"
-	"projects-golang/basic-orm/database"
+	"net/http"
+	"projects-golang/basic/basic-orm/database"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -16,10 +17,10 @@ func StartServer() {
 	app := fiber.New()
 	fmt.Println("Running at : http://localhost:8000")
 
-	// HelloWorld : route to "/"
 	app.Get("/", func(con *fiber.Ctx) error {
-		return con.SendString("HelloWorld endpoint hit")
+		return con.SendString("Hello World")
 	})
+
 	// GetAllUsers : to get all users
 	app.Get("/users", func(con *fiber.Ctx) error {
 		result := database.GetAllUsers()
@@ -60,4 +61,9 @@ func StartServer() {
 	})
 
 	log.Fatal(app.Listen(":8000"))
+}
+
+func helloWorld(writer http.ResponseWriter, reader *http.Request) {
+	data := []byte("Hello World")
+	writer.Write(data)
 }
